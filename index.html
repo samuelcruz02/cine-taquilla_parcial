@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Sistema de taquilla de cine: registro de funciones, recaudación, cambio de asientos y gráfica.">
+<title>Sistema de Taquilla - Cine</title>
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+
+<section id="login">
+  <div class="tarjeta-login">
+    <div class="luces"><span></span><span></span><span></span><span></span><span></span></div>
+    <img class="logo" src="img/logo.svg" alt="Logo del cine" width="64" height="64">
+    <h1>Sistema de taquilla</h1>
+    <p>Cine - Control de funciones</p>
+
+    <label for="usuario">Usuario</label>
+    <input type="text" id="usuario" placeholder="Ingrese usuario">
+
+    <label for="contrasena">Contraseña</label>
+    <input type="password" id="contrasena" placeholder="••••••••">
+
+    <button class="btn-oro" onclick="iniciarSesion()">Iniciar sesión</button>
+    <div class="error" id="errorLogin"></div>
+  </div>
+</section>
+
+<section id="panel" class="oculto">
+
+  <div class="barra">
+    <h2><img class="logo-barra" src="img/logo.svg" alt="" width="28" height="28">Sistema Cine - Control de taquilla</h2>
+    <div>
+      <span class="usuario">Usuario: Cinecali</span>
+      <button class="btn-rojo" onclick="volverAlLogin()">Salir</button>
+    </div>
+  </div>
+
+  <div class="contenedor">
+
+    <div class="col">
+      <div class="caja">
+        <h3>Registro de función</h3>
+        <p class="nota">Completa los datos y calcula la recaudación.</p>
+
+        <label for="pelicula">Nombre de la película</label>
+        <input type="text" id="pelicula" placeholder="Ej: Dune: Parte Dos">
+
+        <div class="fila">
+          <div>
+            <label for="sala">Sala</label>
+            <input type="text" id="sala" placeholder="Ej: Sala 3">
+          </div>
+          <div>
+            <label for="boletas">Boletas vendidas</label>
+            <input type="number" id="boletas" min="1" placeholder="Ej: 50">
+          </div>
+        </div>
+
+        <label for="precio">Precio por boleta (COP)</label>
+        <input type="number" id="precio" value="12000" min="1">
+
+        <button class="btn-oro" onclick="calcularYRegistrar()">Calcular y registrar</button>
+        <button class="btn-borde" onclick="continuarRegistro()">Continuar registro (clave CINE)</button>
+        <div class="error" id="mensaje"></div>
+
+        <hr>
+
+        <h3>Cambio de asiento</h3>
+        <p class="nota">Entre 3:00 p.m. y 6:00 p.m. se cobra un recargo del 5%.</p>
+        <div class="fila">
+          <div>
+            <label for="asientoActual">Asiento actual</label>
+            <input type="text" id="asientoActual" placeholder="Ej: F5-A12">
+          </div>
+          <div>
+            <label for="asientoNuevo">Asiento nuevo</label>
+            <input type="text" id="asientoNuevo" placeholder="Ej: F7-A03">
+          </div>
+        </div>
+        <label for="horaCambio">Hora del cambio</label>
+        <input type="time" id="horaCambio">
+        <button class="btn-borde" onclick="cambiarAsiento()">Cambiar asiento</button>
+        <div class="error" id="mensajeAsiento"></div>
+      </div>
+    </div>
+
+    <div class="col">
+
+      <div class="boleta">
+        <div class="boleta-datos">
+          <p><strong>Película:</strong> <span id="resPelicula">--</span></p>
+          <p><strong>Sala:</strong> <span id="resSala">--</span></p>
+          <p><strong>Boletas vendidas:</strong> <span id="resBoletas">--</span></p>
+          <p><strong>Tarifa base:</strong> $ 12.000 COP</p>
+          <p class="total-etiqueta">Recaudación total</p>
+          <div class="total" id="resTotal">$ -- COP</div>
+        </div>
+        <div class="boleta-reloj">
+          <div class="reloj" id="reloj"><div class="aguja"></div></div>
+          <span id="estadoReloj">Esperando datos</span>
+        </div>
+      </div>
+
+      <div class="caja">
+        <h3>Histórico de recaudación</h3>
+        <p class="nota">Cada función registrada se agrega a la gráfica.</p>
+        <canvas id="grafica" width="560" height="280"></canvas>
+      </div>
+
+      <div class="caja">
+        <h3>Foto de control del operador</h3>
+        <div class="foto-marco" id="marcoFoto">
+          <span id="textoFoto">Aún no hay foto</span>
+          <img id="vistaFoto" class="oculto" alt="Foto de control del operador">
+        </div>
+        <input type="file" id="archivoFoto" accept="image/*" capture="user" class="oculto" onchange="mostrarFoto()">
+        <button class="btn-borde" onclick="document.getElementById('archivoFoto').click()">Capturar / cargar foto</button>
+      </div>
+
+      <div class="caja resultado-asiento">
+        <h3>Resultado del cambio de asiento</h3>
+        <p><span>Cambio:</span> <span id="resCambio">--</span></p>
+        <p><span>Valor base de la boleta:</span> <span id="resBase">--</span></p>
+        <p class="recargo"><span>Recargo 5%:</span> <span id="resRecargo">--</span></p>
+        <p class="final"><span>Total a pagar:</span> <span id="resTotalAsiento">--</span></p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="js/app.js"></script>
+</body>
+</html>

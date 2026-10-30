@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMax slice">
+<defs>
+<linearGradient id="haz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFC94A" stop-opacity=".16"/><stop offset="1" stop-color="#FFC94A" stop-opacity="0"/></linearGradient>
+<pattern id="butacas" width="90" height="70" patternUnits="userSpaceOnUse"><rect x="12" y="8" width="66" height="30" rx="16" fill="#3B1C28"/><rect x="6" y="30" width="78" height="30" rx="10" fill="#4A2433"/></pattern>
+</defs>
+<polygon points="700,0 900,0 1250,700 350,700" fill="url(#haz)"/>
+<polygon points="200,0 300,0 560,700 40,700" fill="url(#haz)" opacity=".6"/>
+<polygon points="1300,0 1400,0 1560,700 1040,700" fill="url(#haz)" opacity=".6"/>
+<rect x="0" y="640" width="1600" height="260" fill="url(#butacas)" opacity=".9"/>
+</svg>
